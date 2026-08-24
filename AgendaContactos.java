@@ -12,6 +12,7 @@ public class AgendaContactos{
         scanner = new Scanner(System.in);
     }
 
+    // Método principal del programa
     public void iniciar() {
 
         int opcion;
@@ -68,7 +69,7 @@ public class AgendaContactos{
         System.out.println("║ 5. Salir                         ║");
         System.out.println("╚══════════════════════════════════╝");
     }
-
+    // Opción 1
     private void agregarContacto(){
         System.out.print("Nombre: ");
         String nombre = scanner.nextLine();
@@ -90,6 +91,7 @@ public class AgendaContactos{
         System.out.println("Contacto agregado correctamente.");
     }
 
+    // Opción 2
     private void mostrarContactos() {
         if (contactos.isEmpty()) {
             System.out.println("No hay contactos registrados.");
@@ -106,9 +108,15 @@ public class AgendaContactos{
         System.out.println("────────────────────────────────────");
     }
 
+    // Opción 3
     private void buscarContacto() {
         System.out.print("Ingrese el nombre a buscar: ");
         String nombreBuscado = scanner.nextLine().trim().toLowerCase();
+
+        if (nombreBuscado.isEmpty()) {
+            System.out.println("El nombre a buscar no puede estar vacío.");
+            return;
+        }
 
         boolean encontrado = false;
 
@@ -125,16 +133,22 @@ public class AgendaContactos{
         }
     }
 
+    // Opción 4
     private void eliminarContacto(){
         System.out.print("Ingrese el nombre a eliminar: ");
-        String nombreBuscado = scanner.nextLine().trim();
+        String nombreAEliminar = scanner.nextLine().trim();
+
+        if (nombreAEliminar.isEmpty()) {
+            System.out.println("El nombre a eliminar no puede estar vacío.");
+            return;
+        }
 
         boolean encontrado = false;
 
         for (int i = 0; i < contactos.size(); i++) {
             Contacto contacto = contactos.get(i);
             String nombreContacto = contacto.getNombre().trim();
-            if (nombreContacto.equals(nombreBuscado)) {
+            if (nombreContacto.equals(nombreAEliminar)) {
                 contactos.remove(i);
                 encontrado = true;
                 break;
@@ -142,9 +156,9 @@ public class AgendaContactos{
         }
 
         if (encontrado) {
-            System.out.println("El contacto " + nombreBuscado + " fue eliminado correctamente.");
+            System.out.println("El contacto " + nombreAEliminar + " fue eliminado correctamente.");
         } else {
-            System.out.println("No se encontro el contacto.");
+            System.out.println("No se encontró el contacto.");
         }
     }
 }
