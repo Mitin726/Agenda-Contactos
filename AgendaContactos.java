@@ -20,7 +20,6 @@ public class AgendaContactos{
             System.out.print("Seleccione una opción: ");
             try {
                 opcion = Integer.parseInt(scanner.nextLine());
-
             } catch (NumberFormatException e) {
                 System.out.println("Opción inválida. Debe ingresar un número.");
                 opcion = 0;
@@ -30,7 +29,7 @@ public class AgendaContactos{
                 case 0: 
                     break;
                 case 1:
-                    System.out.println("Agregar contacto");
+                    agregarContacto();
                     break;
 
                 case 2:
@@ -57,21 +56,41 @@ public class AgendaContactos{
     }
 
     private void mostrarMenu(){
-        System.out.println("""
-        1. Agregar contacto
-        2. Ver todos los contactos
-        3. Buscar contacto
-        4. Eliminar Contacto
-        5. Salir
-        """);
+        System.out.println();
+        System.out.println("╔══════════════════════════════════╗");
+        System.out.println("║       AGENDA DE CONTACTOS        ║");
+        System.out.println("╠══════════════════════════════════╣");
+        System.out.println("║ 1. Agregar contacto              ║");
+        System.out.println("║ 2. Ver todos los contactos       ║");
+        System.out.println("║ 3. Buscar contacto               ║");
+        System.out.println("║ 4. Eliminar contacto             ║");
+        System.out.println("║ 5. Salir                         ║");
+        System.out.println("╚══════════════════════════════════╝");
     }
 
     private void agregarContacto(){
-        
+        System.out.print("Nombre: ");
+        String nombre = scanner.nextLine();
+
+        if (nombre.trim().isEmpty()) {
+            System.out.println("El nombre no puede estar vacío.");
+            return;
+        }
+
+        System.out.print("Teléfono: ");
+        String telefono = scanner.nextLine();
+
+        System.out.print("Correo: ");
+        String correo = scanner.nextLine();
+
+        Contacto contacto = new Contacto(nombre, telefono, correo);
+
+        contactos.add(contacto);
+        System.out.println("Contacto agregado correctamente.");
     }
 
     private void mostrarContactos(){
-
+        
     }
 
     private void buscarContacto(){

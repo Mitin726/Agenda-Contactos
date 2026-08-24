@@ -40,4 +40,10 @@ public class Contacto {
     public void setCorreo(String correo){
         this.correo = correo;
     }
+
+    // ToString
+
+    public String toString() {
+        return "nombre=" + this.nombre + "| telefono=" + this.telefono + " | correo=" + this.correo;
+    }
 }
