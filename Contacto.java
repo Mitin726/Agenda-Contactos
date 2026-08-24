@@ -42,8 +42,8 @@ public class Contacto {
     }
 
     // ToString
-
+    @Override
     public String toString() {
-        return "nombre=" + this.nombre + "| telefono=" + this.telefono + " | correo=" + this.correo;
+        return "| nombre=" + this.nombre + " | telefono=" + this.telefono + " | correo=" + this.correo + " |";
     }
 }

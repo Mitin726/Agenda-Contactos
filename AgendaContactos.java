@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Comparator;
 
 public class AgendaContactos{
 
@@ -33,15 +34,15 @@ public class AgendaContactos{
                     break;
 
                 case 2:
-                    System.out.println("Ver todos los contactos");
+                    mostrarContactos();
                     break;
 
                 case 3:
-                    System.out.println("Buscar contacto");
+                    buscarContacto();
                     break;
 
                 case 4:
-                    System.out.println("Eliminar contacto");
+                    eliminarContacto();
                     break;
 
                 case 5:
@@ -89,15 +90,57 @@ public class AgendaContactos{
         System.out.println("Contacto agregado correctamente.");
     }
 
-    private void mostrarContactos(){
-        
+    private void mostrarContactos() {
+        if (contactos.isEmpty()) {
+            System.out.println("No hay contactos registrados.");
+            return;
+        }
+
+        contactos.sort(Comparator.comparing(Contacto::getNombre,String.CASE_INSENSITIVE_ORDER));
+
+        System.out.println("── Lista de contactos (" + contactos.size() + ") ──");
+        for (int i = 0; i < contactos.size(); i++) {
+            System.out.println((i + 1) + ". " + contactos.get(i));
+        }
+
+        System.out.println("────────────────────────────────────");
     }
 
-    private void buscarContacto(){
+    private void buscarContacto() {
+        System.out.print("Ingrese el nombre a buscar: ");
+        String nombreBuscado = scanner.nextLine().trim().toLowerCase();
 
+        boolean encontrado = false;
+
+        for (int i = 0; i < contactos.size(); i++) {
+            Contacto contacto = contactos.get(i);
+            String nombreContacto = contacto.getNombre().toLowerCase();
+            if (nombreContacto.contains(nombreBuscado)) {
+                System.out.println(contacto);
+                encontrado = true;
+            }
+        }
+        if (!encontrado) {
+            System.out.println("No se encontraron contactos.");
+        }
     }
 
     private void eliminarContacto(){
+        System.out.print("Ingrese el nombre a eliminar: ");
+        String nombreBuscado = scanner.nextLine().trim();
 
+        boolean encontrado = false;
+
+        for (int i = 0; i < contactos.size(); i++) {
+            Contacto contacto = contactos.get(i);
+            String nombreContacto = contacto.getNombre().trim();
+            if (nombreContacto.equals(nombreBuscado)) {
+                contactos.remove(i);
+                encontrado = true;
+            }
+        }
+        if (!encontrado) {
+            System.out.println("No se encontro el contacto.");
+        }
     }
 }
