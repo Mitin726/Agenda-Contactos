@@ -137,9 +137,13 @@ public class AgendaContactos{
             if (nombreContacto.equals(nombreBuscado)) {
                 contactos.remove(i);
                 encontrado = true;
+                break;
             }
         }
-        if (!encontrado) {
+
+        if (encontrado) {
+            System.out.println("El contacto " + nombreBuscado + " fue eliminado correctamente.");
+        } else {
             System.out.println("No se encontro el contacto.");
         }
     }
